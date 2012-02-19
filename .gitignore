@@ -1,0 +1,12 @@
+.classpath
++*.iml
++*.ipr
++*.iws
+.project
+.settings/
+.idea/
+.cache
+.DS_Store
+target/
+
+99-scala-problems.iml
