@@ -21,6 +21,10 @@ package se.sawano.scala.ninetynine
 
 import util.Random
 
+/*
+ * Working with lists
+ */
+
 //Find the last element of a list
 object P01 {
   def last(list: List[Any]): Any = list last
@@ -211,12 +215,10 @@ object P27 {
 
 // Sorting a list of lists according to length of sublists
 object P28 {
-  def lsort(list: List[List[Symbol]]): List[List[Symbol]] = list.sortBy(_.size)
+  def lsort(lists: List[List[Symbol]]): List[List[Symbol]] = lists.sortBy(_.size)
 
-  def lsortFreq(list: List[List[Symbol]]): List[List[Symbol]] = {
-    // TODO implement
-    val map = list.groupBy(_.size)
-    val l = map.toList
-    l.sortWith(_._1 > _._1) flatMap (_._2)
+  def lsortFreq(lists: List[List[Symbol]]): List[List[Symbol]] = {
+    val sizeAndListsTuples = lists.groupBy(_.size).toList
+    sizeAndListsTuples.sortWith(_._2.size < _._2.size) flatMap (_._2)
   }
 }
