@@ -32,6 +32,12 @@ class S99Int(val start: Int) {
   // P33 Determine whether two positive integer numbers are coprime
   def isCoprimeTo(that: Int): Boolean = S99Int.gcd(start, that) == 1
 
+  // P34 Calculate Euler's totient function phi(m)
+  // Euler's so-called totient function phi(m) is defined as the number of positive integers r (1 <= r <= m) that are coprime to m.
+  def totient: Int = (1 to start).filter(isCoprimeTo(_)).size
+
+  // P35 Determine the prime factors of a given positive integer
+  def primeFactors: List[Int] = Nil
 }
 
 object S99Int {

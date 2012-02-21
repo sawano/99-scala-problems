@@ -67,4 +67,14 @@ class P31_41SpecTest extends Specification {
       4.isCoprimeTo(8) must beFalse
     }
   }
+  "Calling S99Int.totient" should {
+    "calculate Euler's totient function phi(m)" in {
+      10.totient must be equalTo 4
+    }
+  }
+  "Calling S99Int.primeFactors" should {
+    "determine the prime factors of a given positive integer" in {
+      315.primeFactors must be equalTo List(3, 3, 5, 7)
+    }
+  }
 }
