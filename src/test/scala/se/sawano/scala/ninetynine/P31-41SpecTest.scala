@@ -43,7 +43,7 @@ import org.specs2.mutable.Specification
 import S99Int._
 
 @RunWith(classOf[JUnitRunner])
-class P01_28Spec extends Specification {
+class P31_41SpecTest extends Specification {
 
   "Calling S99Int.isPrime" should {
     "return true if a number is a prime number" in {
