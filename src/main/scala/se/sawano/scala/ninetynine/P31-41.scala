@@ -26,6 +26,8 @@ package se.sawano.scala.ninetynine
 
 class S99Int(val start: Int) {
 
+  import S99Int._
+
   // P31 Determine whether a given integer number is prime
   def isPrime: Boolean = (2 until start).find(start % _ == 0) == None
 
@@ -37,7 +39,21 @@ class S99Int(val start: Int) {
   def totient: Int = (1 to start).filter(isCoprimeTo(_)).size
 
   // P35 Determine the prime factors of a given positive integer
-  def primeFactors: List[Int] = Nil
+  def primeFactors: List[Int] = {
+    def multiplicity(i: Int, prime: Int): List[Int] = {
+      if (i <= prime)
+        Nil
+      else if (i % prime == 0)
+        prime +: multiplicity(i / prime, prime)
+      else
+        multiplicity(i / prime, prime)
+    }
+
+    (2 until start).toList filter (x => start % x == 0 && x.isPrime) flatMap {
+      prime => multiplicity(start, prime)
+    }
+  }
+
 }
 
 object S99Int {
