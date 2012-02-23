@@ -77,4 +77,14 @@ class P31_41SpecTest extends Specification {
       315.primeFactors must be equalTo List(3, 3, 5, 7)
     }
   }
+  "Calling S99Int.primeFactorMultiplicity" should {
+    "construct a list containing the prime factors and their multiplicity" in {
+      315.primeFactorMultiplicity must be equalTo List((3, 2), (5, 1), (7, 1))
+    }
+  }
+  "Calling S99Int.totient2" should {
+    "calculate Euler's totient function phi(m)" in {
+      10.totient2 must be equalTo 4
+    }
+  }
 }

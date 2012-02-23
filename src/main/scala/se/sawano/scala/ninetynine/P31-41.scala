@@ -40,19 +40,30 @@ class S99Int(val start: Int) {
 
   // P35 Determine the prime factors of a given positive integer
   def primeFactors: List[Int] = {
-    def multiplicity(i: Int, prime: Int): List[Int] = {
-      if (i <= prime)
-        Nil
-      else if (i % prime == 0)
-        prime +: multiplicity(i / prime, prime)
-      else
-        multiplicity(i / prime, prime)
-    }
-
     (2 until start).toList filter (x => start % x == 0 && x.isPrime) flatMap {
       prime => multiplicity(start, prime)
     }
   }
+
+  private def multiplicity(i: Int, prime: Int): List[Int] = {
+    if (i <= prime)
+      Nil
+    else if (i % prime == 0)
+      prime +: multiplicity(i / prime, prime)
+    else
+      multiplicity(i / prime, prime)
+  }
+
+  // P36 Determine the prime factors of a given positive integer (2)
+  def primeFactorMultiplicity: List[(Int, Int)] = {
+    (2 until start).toList filter (x => start % x == 0 && x.isPrime) map {
+      prime => (prime, multiplicity(start, prime).size)
+    }
+  }
+
+  // P37 Calculate Euler's totient function phi(m) (improved)
+  def totient2: Int = primeFactorMultiplicity map (x => (x._1 - 1) * (math.pow(x._1, x._2 - 1).toInt)) product
+
 
 }
 
@@ -70,6 +81,16 @@ object S99Int {
     else {
       gcd(max % min, min)
     }
+  }
+
+  // P38 Compare the two methods of calculating Euler's totient function
+  def compareTotients = {
+    val t1 = System.currentTimeMillis()
+    10090 totient
+    val t2 = System.currentTimeMillis()
+    10090 totient2
+    val t3 = System.currentTimeMillis()
+    printf("totient: %d ms, totient2: %d ms", t2 - t1, t3 - t2)
   }
 }
 
