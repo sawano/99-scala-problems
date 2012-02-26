@@ -43,12 +43,39 @@ package se.sawano.scala.ninetynine
 object S99Logic {
 
   // P46 Truth tables for logical expressions
+  def not(a: Boolean): Boolean = {
+    a match {
+      case true => false
+      case false => true
+    }
+  }
+
   def and(a: Boolean, b: Boolean): Boolean = {
     (a, b) match {
       case (true, true) => true
       case _ => false
     }
   }
+
+  def or(a: Boolean, b: Boolean): Boolean = {
+    (a, b) match {
+      case (_, true) => true
+      case (true, _) => true
+      case _ => false
+    }
+  }
+
+
+  def nand(a: Boolean, b: Boolean): Boolean = not(and(a, b))
+
+  def nor(a: Boolean, b: Boolean): Boolean = not(or(a, b))
+
+  def equ(a: Boolean, b: Boolean): Boolean = or(and(a, b), and(not(a), not(b)))
+
+  def xor(a: Boolean, b: Boolean): Boolean = not(equ(a, b))
+
+  def impl(a: Boolean, b: Boolean): Boolean = or(not(a), b)
+
 }
 
 
