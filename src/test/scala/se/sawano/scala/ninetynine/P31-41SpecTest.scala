@@ -16,22 +16,6 @@
 
 package se.sawano.scala.ninetynine
 
-/*
-* Copyright 2012 Daniel Sawano
-*
-*    Licensed under the Apache License, Version 2.0 (the "License");
-*    you may not use this file except in compliance with the License.
-*    You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*    Unless required by applicable law or agreed to in writing, software
-*    distributed under the License is distributed on an "AS IS" BASIS,
-*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*    See the License for the specific language governing permissions and
-*    limitations under the License.
-*/
-
 /**
  * These problems are taken from the "S-99 Ninety-Nine Scala Problems" http://aperiodic.net/phil/scala/s-99/ﬁ
  */
@@ -85,6 +69,34 @@ class P31_41SpecTest extends Specification {
   "Calling S99Int.totient2" should {
     "calculate Euler's totient function phi(m)" in {
       10.totient2 must be equalTo 4
+    }
+  }
+  "Calling S99Int.compareTotients" should {
+    "compare the two methods of calculating Euler's totient function" in {
+      S99Int.compareTotients
+      success
+    }
+  }
+  "Calling S99Int.listPrimesInRange" should {
+    "return a list of prime numbers" in {
+      S99Int.listPrimesInRange(7 to 31) must be equalTo List(7, 11, 13, 17, 19, 23, 29, 31)
+    }
+  }
+  "Calling S99Int.goldbach" should {
+    "return the two primes whose sum is the current int" in {
+      28.goldbach must be equalTo(5, 23)
+    }
+  }
+  "Calling S99Int.printGoldbachList" should {
+    "print the result" in {
+      S99Int.printGoldbachList(9 to 20)
+      success
+    }
+  }
+  "Calling S99Int.printGoldbachListLimited" should {
+    "print the result" in {
+      S99Int.printGoldbachListLimited(1 to 2000, 50)
+      success
     }
   }
 }

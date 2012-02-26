@@ -65,6 +65,27 @@ class S99Int(val start: Int) {
   def totient2: Int = primeFactorMultiplicity map (x => (x._1 - 1) * (math.pow(x._1, x._2 - 1).toInt)) product
 
 
+  //P40  Goldbach's conjecture
+  def goldbach: (Int, Int) = {
+    val l: List[(Int, Int)] = allGoldbachs
+    if (l.isEmpty)
+      null
+    else
+      l.head
+  }
+
+  private def allGoldbachs: List[(Int, Int)] = {
+    val primes: List[Int] = (2 to start).toList filter (_.isPrime)
+    primes map {
+      x => val m = primes.find(_ + x == start)
+      if (m.isDefined)
+        (x, m.get)
+      else
+        null
+    } filter (_ != null)
+  }
+
+
 }
 
 object S99Int {
@@ -91,6 +112,32 @@ object S99Int {
     10090 totient2
     val t3 = System.currentTimeMillis()
     printf("totient: %d ms, totient2: %d ms", t2 - t1, t3 - t2)
+  }
+
+  // P39 A list of prime numbers
+  def listPrimesInRange(numbers: Range): List[Int] = numbers.toList filter (_.isPrime)
+
+  // P41 A list of Goldbach compositions
+  def printGoldbachList(r: Range) = {
+    r foreach {
+      x =>
+        if (x % 2 == 0) {
+          val goldbach: (Int, Int) = x.goldbach
+          printf("%d = %d + %d\n", x, goldbach._1, goldbach._2)
+        }
+    }
+  }
+
+  // P41 b
+  def printGoldbachListLimited(r: Range, min: Int) = {
+    r foreach {
+      x =>
+        if (x % 2 == 0) {
+          val goldbach: (Int, Int) = x.goldbach
+          if (goldbach != null && goldbach._1 > min && goldbach._2 > min)
+            printf("%d = %d + %d\n", x, goldbach._1, goldbach._2)
+        }
+    }
   }
 }
 
