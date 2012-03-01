@@ -27,7 +27,7 @@ import org.specs2.mutable.Specification
 import S99Logic._
 
 @RunWith(classOf[JUnitRunner])
-class P46_50SpecTest extends Specification {
+class P46SpecTest extends Specification {
 
   "Calling S99Logic.and" should {
     "return true if a and b are true" in {
@@ -83,6 +83,12 @@ class P46_50SpecTest extends Specification {
       impl(true, false) must beFalse
       impl(false, true) must beTrue
       impl(false, false) must beTrue
+    }
+  }
+  "Calling S99Logic.table2" should {
+    "print the truth table for a given logical expression" in {
+      table2((a: Boolean, b: Boolean) => and(a, or(a, b)))
+      success
     }
   }
 }

@@ -76,6 +76,65 @@ object S99Logic {
 
   def impl(a: Boolean, b: Boolean): Boolean = or(not(a), b)
 
+  def table2(f: (Boolean, Boolean) => Boolean) = {
+    println("A\t\tB\t\tResult")
+    for {a <- List(true, false);
+         b <- List(true, false)
+    } {
+      printf("%s\t%s\t%s\n", a, b, f(a, b))
+    }
+  }
+
+}
+
+object S99Logicb {
+  implicit def s99LogicToBoolean(v: Boolean): S99Logicb = new S99Logicb(v)
+
+
+  def gray(n: Int): List[String] = {
+    if (n == 1) {
+      List("0", "1")
+    }
+    else {
+      val l = gray(n - 1)
+      l.map('0' +: _) ++ l.reverse.map('1' +: _)
+    }
+  }
+
+}
+
+class S99Logicb(a: Boolean) {
+
+  import S99Logic.not
+  import S99Logicb._
+
+  //P47 Truth tables for logical expressions (2)
+  def and(b: Boolean): Boolean = {
+    (a, b) match {
+      case (true, true) => true
+      case _ => false
+    }
+  }
+
+  def or(b: Boolean): Boolean = {
+    (a, b) match {
+      case (_, true) => true
+      case (true, _) => true
+      case _ => false
+    }
+  }
+
+
+  def nand(b: Boolean): Boolean = not(a and b)
+
+  def nor(b: Boolean): Boolean = not(a or b)
+
+  def equ(b: Boolean): Boolean = (a and b) or (not(a) and not(b))
+
+  def xor(b: Boolean): Boolean = not(a equ b)
+
+  def impl(b: Boolean): Boolean = not(a) or b
+
 }
 
 
