@@ -90,10 +90,9 @@ object S99Logic {
 object S99Logicb {
   implicit def s99LogicToBoolean(v: Boolean): S99Logicb = new S99Logicb(v)
 
-
   def gray(n: Int): List[String] = {
-    if (n == 1) {
-      List("0", "1")
+    if (n == 0) {
+      List("")
     }
     else {
       val l = gray(n - 1)
